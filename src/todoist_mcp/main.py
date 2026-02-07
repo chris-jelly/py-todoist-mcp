@@ -2,7 +2,10 @@
 
 # Import tools to register them with the MCP server
 from todoist_mcp.server import mcp
-from todoist_mcp.tools import tasks  # noqa: F401
+from todoist_mcp.tools import (
+    projects,  # noqa: F401
+    tasks,  # noqa: F401
+)
 from todoist_mcp.utils import configure_logging, get_logger
 
 
