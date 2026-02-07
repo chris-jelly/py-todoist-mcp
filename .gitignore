@@ -205,3 +205,11 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+# Ralph working files
+.claude/
+plans/prd.json
+plans/progress.txt
+plans/implementation_plan.md
+plans/suggested_spec_changes.md
+plans/.last-branch
+plans/archive/

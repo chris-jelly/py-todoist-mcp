@@ -1,0 +1,6 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Theme configuration
+  "model": "opencode/kimi-k2.5-free",
+  "autoupdate": true,
+}
