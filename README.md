@@ -37,11 +37,12 @@ Or install in development mode:
 uv pip install -e ".[dev]"
 ```
 
-### 3. Set up environment variables
+### 3. Set up your API token
 
-Create a `.env` file or export the environment variable directly:
+The server reads `TODOIST_API_TOKEN` from the environment. Set it in your shell profile (`~/.bashrc`, `~/.zshrc`, etc.) so it's always available:
 
 ```bash
+# Add to your shell profile
 export TODOIST_API_TOKEN="your-api-token-here"
 ```
 
@@ -49,6 +50,8 @@ To obtain your Todoist API token:
 1. Log in to [Todoist](https://todoist.com)
 2. Go to Settings → Integrations → Developer
 3. Copy your API token
+
+> **Note:** Avoid placing your API token directly in MCP configuration files (e.g., `opencode.json`). These files are easy to accidentally commit or share. The server will pick up the token from your environment automatically.
 
 ## Configuration
 
