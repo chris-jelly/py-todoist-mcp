@@ -52,13 +52,9 @@ To obtain your Todoist API token:
 
 ## Configuration
 
-### Claude Desktop
+### Opencode
 
-Add the following configuration to your Claude Desktop `claude_desktop_config.json`:
-
-**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+Add the following configuration to your Opencode `~/.config/opencode/opencode.json`:
 
 ```json
 {
@@ -79,13 +75,21 @@ Add the following configuration to your Claude Desktop `claude_desktop_config.js
 }
 ```
 
-If you have the project installed globally, you can also use:
+### Codex
+
+Add the following to your Codex configuration file (location varies by installation):
 
 ```json
 {
   "mcpServers": {
     "todoist": {
-      "command": "todoist-mcp",
+      "command": "uv",
+      "args": [
+        "run",
+        "--python",
+        "3.14",
+        "todoist-mcp"
+      ],
       "env": {
         "TODOIST_API_TOKEN": "your-api-token-here"
       }
@@ -96,7 +100,7 @@ If you have the project installed globally, you can also use:
 
 ## Usage
 
-Once configured, you can use natural language with Claude to interact with Todoist:
+Once configured, you can use natural language to interact with Todoist:
 
 ### Task Examples
 
@@ -223,9 +227,15 @@ Contributions are welcome! Please ensure:
 - Check that your Todoist account is active
 - Ensure the token has appropriate permissions
 
-### Claude Desktop not connecting
+### AI Assistant not connecting
 
+**For Opencode:**
 - Verify the configuration JSON syntax
-- Check that the path to the server is correct
-- Look at Claude Desktop logs for error messages
-- Try restarting Claude Desktop after configuration changes
+- Check the Opencode logs: `~/.config/opencode/logs/`
+- Run `opencode --version` to ensure it's installed correctly
+- Restart Opencode after configuration changes
+
+**For Codex:**
+- Verify the configuration JSON syntax
+- Check Codex output for error messages
+- Restart Codex after configuration changes
