@@ -44,15 +44,34 @@ To obtain your Todoist API token:
 
 ## Configuration
 
-### Opencode
+### OpenCode
 
-Add the following to `~/.config/opencode/opencode.json`:
+Add the following to `~/.config/opencode/opencode.json`. This uses `uvx` to run the server directly from the git repo — no local install required:
 
 ```json
 {
-  "mcpServers": {
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
     "todoist": {
-      "command": "todoist-mcp"
+      "type": "local",
+      "command": ["uvx", "--from", "git+https://github.com/chris-jelly/py-todoist-mcp.git", "todoist-mcp"],
+      "environment": {
+        "TODOIST_API_TOKEN": "{env:TODOIST_API_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+If you've already installed the package locally (via `uv tool install`), you can use the simpler form:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "todoist": {
+      "type": "local",
+      "command": ["todoist-mcp"]
     }
   }
 }

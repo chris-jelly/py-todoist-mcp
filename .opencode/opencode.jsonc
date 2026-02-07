@@ -1,6 +1,15 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  // Theme configuration
-  "model": "opencode/kimi-k2.5-free",
+  "theme": "dracula",
+  "model": "anthropic/claude-opus-4.6",
   "autoupdate": true,
+  "mcp": {
+    "todoist": {
+      "type": "local",
+      "command": ["uvx", "--from", "git+https://github.com/chris-jelly/py-todoist-mcp.git", "todoist-mcp"],
+      "environment": {
+        "TODOIST_API_TOKEN": "{env:TODOIST_API_TOKEN}"
+      }
+    }
+  }
 }
