@@ -1,17 +1,13 @@
 """Entry point for the Todoist MCP server."""
 
-import logging
-
 from todoist_mcp.server import mcp
+from todoist_mcp.utils import configure_logging, get_logger
 
 
 def main() -> None:
     """Run the Todoist MCP server."""
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    )
-    logger = logging.getLogger(__name__)
+    configure_logging()
+    logger = get_logger(__name__)
     logger.info("Starting Todoist MCP server...")
     mcp.run()
 
