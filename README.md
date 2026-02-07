@@ -18,28 +18,17 @@ A Python MCP (Model Context Protocol) server for Todoist integration, enabling A
 
 ## Installation
 
-### 1. Clone the repository
+### 1. Install with uv
 
 ```bash
-git clone <repository-url>
-cd py-todoist-mcp
+uv tool install git+https://github.com/chris-jelly/py-todoist-mcp.git
 ```
 
-### 2. Install dependencies with uv
+This installs `todoist-mcp` into an isolated environment and makes it available globally on your `PATH`.
 
-```bash
-uv sync
-```
+### 2. Set up your API token
 
-Or install in development mode:
-
-```bash
-uv pip install -e ".[dev]"
-```
-
-### 3. Set up your API token
-
-The server reads `TODOIST_API_TOKEN` from the environment. Set it in your shell profile (`~/.bashrc`, `~/.zshrc`, etc.) so it's always available:
+The server reads `TODOIST_API_TOKEN` from the environment. Add it to your shell profile (`~/.bashrc`, `~/.zshrc`, etc.):
 
 ```bash
 # Add to your shell profile
@@ -51,28 +40,19 @@ To obtain your Todoist API token:
 2. Go to Settings → Integrations → Developer
 3. Copy your API token
 
-> **Note:** Avoid placing your API token directly in MCP configuration files (e.g., `opencode.json`). These files are easy to accidentally commit or share. The server will pick up the token from your environment automatically.
+> **Note:** Avoid placing your API token directly in MCP configuration files. These files are easy to accidentally commit or share. The server will pick up the token from your environment automatically.
 
 ## Configuration
 
 ### Opencode
 
-Add the following configuration to your Opencode `~/.config/opencode/opencode.json`:
+Add the following to `~/.config/opencode/opencode.json`:
 
 ```json
 {
   "mcpServers": {
     "todoist": {
-      "command": "uv",
-      "args": [
-        "run",
-        "--python",
-        "3.14",
-        "todoist-mcp"
-      ],
-      "env": {
-        "TODOIST_API_TOKEN": "your-api-token-here"
-      }
+      "command": "todoist-mcp"
     }
   }
 }
@@ -86,16 +66,7 @@ Add the following to your Codex configuration file (location varies by installat
 {
   "mcpServers": {
     "todoist": {
-      "command": "uv",
-      "args": [
-        "run",
-        "--python",
-        "3.14",
-        "todoist-mcp"
-      ],
-      "env": {
-        "TODOIST_API_TOKEN": "your-api-token-here"
-      }
+      "command": "todoist-mcp"
     }
   }
 }
@@ -160,13 +131,17 @@ Once configured, you can use natural language to interact with Todoist:
 
 ## Development
 
+### Setup
+
+```bash
+git clone git@github.com:chris-jelly/py-todoist-mcp.git
+cd py-todoist-mcp
+uv sync
+```
+
 ### Running the server locally
 
 ```bash
-# Set your API token
-export TODOIST_API_TOKEN="your-api-token-here"
-
-# Run the server
 uv run todoist-mcp
 ```
 
