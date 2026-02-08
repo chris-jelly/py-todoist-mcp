@@ -12,6 +12,9 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "ruff>=0.1.0",
+    "pytest>=8.0",
+    "pytest-cov>=6.0",
+    "mypy>=1.13",
 ]
 
 [project.scripts]
@@ -35,3 +38,11 @@ indent-style = "space"
 [tool.ruff.lint]
 select = ["E", "F", "I", "W"]
 ignore = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
