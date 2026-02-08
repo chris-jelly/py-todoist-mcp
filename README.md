@@ -12,7 +12,7 @@ A Python MCP (Model Context Protocol) server for Todoist integration, enabling A
 
 ## Prerequisites
 
-- Python 3.14 or higher
+- Python 3.13 or higher
 - [uv](https://github.com/astral-sh/uv) for Python package management
 - A Todoist API token
 
@@ -215,7 +215,7 @@ Contributions are welcome! Please ensure:
 ### Server won't start
 
 - Verify `TODOIST_API_TOKEN` is set correctly
-- Check that Python 3.14+ is installed: `python --version`
+- Check that Python 3.13+ is installed: `python --version`
 - Ensure uv is installed: `uv --version`
 
 ### Authentication errors
