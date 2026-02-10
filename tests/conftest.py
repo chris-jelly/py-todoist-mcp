@@ -99,11 +99,15 @@ def fake_nested_project() -> MagicMock:
 
 
 @pytest.fixture(autouse=True)
-def env_with_token(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Automatically set TODOIST_API_TOKEN for all tests.
+def env_with_token(request: pytest.FixtureRequest, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Automatically set TODOIST_API_TOKEN for unit tests only.
 
-    This fixture runs automatically (autouse=True) to ensure all tests
+    This fixture runs automatically (autouse=True) to ensure unit tests
     have a valid API token environment variable set, preventing
     RuntimeError when importing modules that check for the token.
+
+    Skips for integration tests so the real token is preserved.
     """
+    if "integration" in {mark.name for mark in request.node.iter_markers()}:
+        return
     monkeypatch.setenv("TODOIST_API_TOKEN", "test-token-12345")

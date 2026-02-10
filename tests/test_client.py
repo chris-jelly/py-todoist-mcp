@@ -11,7 +11,7 @@ class TestValidateToken:
 
     def test_validate_token_success(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Test that validate_token returns the token when set."""
-        monkeypatch.setattr(client, "TODOIST_API_TOKEN", "valid-token-123")
+        monkeypatch.setenv("TODOIST_API_TOKEN", "valid-token-123")
 
         result = client.validate_token()
 
@@ -19,7 +19,7 @@ class TestValidateToken:
 
     def test_validate_token_missing(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Test that validate_token raises RuntimeError when token is missing."""
-        monkeypatch.setattr(client, "TODOIST_API_TOKEN", None)
+        monkeypatch.delenv("TODOIST_API_TOKEN", raising=False)
 
         with pytest.raises(RuntimeError) as exc_info:
             client.validate_token()
@@ -32,7 +32,7 @@ class TestCreateClient:
 
     def test_create_client_returns_todoist_api(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Test that create_client returns a TodoistAPI instance."""
-        monkeypatch.setattr(client, "TODOIST_API_TOKEN", "test-token")
+        monkeypatch.setenv("TODOIST_API_TOKEN", "test-token")
 
         result = client.create_client()
 
@@ -41,7 +41,7 @@ class TestCreateClient:
 
     def test_create_client_calls_validate_token(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Test that create_client validates the token during creation."""
-        monkeypatch.setattr(client, "TODOIST_API_TOKEN", None)
+        monkeypatch.delenv("TODOIST_API_TOKEN", raising=False)
 
         with pytest.raises(RuntimeError, match="TODOIST_API_TOKEN"):
             client.create_client()

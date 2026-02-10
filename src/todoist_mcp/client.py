@@ -1,15 +1,15 @@
 """Todoist API client wrapper."""
 
 import os
-from typing import Final
 
 from todoist_api_python.api import TodoistAPI
-
-TODOIST_API_TOKEN: Final[str | None] = os.environ.get("TODOIST_API_TOKEN")
 
 
 def validate_token() -> str:
     """Validate that the TODOIST_API_TOKEN environment variable is set.
+
+    Reads the token from the environment at call time (not import time)
+    to support test fixtures that set the env var after module import.
 
     Returns:
         The API token value.
@@ -17,13 +17,14 @@ def validate_token() -> str:
     Raises:
         RuntimeError: If TODOIST_API_TOKEN is not set.
     """
-    if not TODOIST_API_TOKEN:
+    token = os.environ.get("TODOIST_API_TOKEN")
+    if not token:
         msg = (
             "TODOIST_API_TOKEN environment variable is required. "
             "Please set it to your Todoist API token."
         )
         raise RuntimeError(msg)
-    return TODOIST_API_TOKEN
+    return token
 
 
 def create_client() -> TodoistAPI:

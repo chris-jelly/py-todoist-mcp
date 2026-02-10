@@ -17,13 +17,18 @@ def todoist_get_projects() -> str:
     """
     client = create_client()
 
-    projects_list = client.get_projects()
+    projects_iter = client.get_projects()
 
-    if not projects_list:
+    # Collect all projects from the paginator
+    all_projects = []
+    for project_batch in projects_iter:
+        all_projects.extend(project_batch)
+
+    if not all_projects:
         return "No projects found."
 
     result = []
-    for project in projects_list:
+    for project in all_projects:
         color_info = f" (Color: {project.color})" if project.color else ""
         parent_info = f" [Parent: {project.parent_id}]" if project.parent_id else ""
         result.append(f"- {project.name}{color_info}{parent_info} (ID: {project.id})")
